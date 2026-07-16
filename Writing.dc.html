@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:oklch(0.99 0.003 255);--surface:oklch(0.972 0.004 255);--surface-2:oklch(0.948 0.006 255);
+    --fg:oklch(0.24 0.012 260);--muted:oklch(0.52 0.012 260);--border:oklch(0.9 0.006 260);
+    --accent:oklch(0.56 0.15 255);--accent-soft:oklch(0.56 0.15 255 / 0.12);
+  }
+  [data-theme="dark"]{
+    --bg:oklch(0.17 0.012 260);--surface:oklch(0.205 0.014 260);--surface-2:oklch(0.25 0.016 260);
+    --fg:oklch(0.94 0.006 260);--muted:oklch(0.66 0.012 260);--border:oklch(0.31 0.014 260);
+    --accent:oklch(0.74 0.13 255);--accent-soft:oklch(0.74 0.13 255 / 0.15);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:'IBM Plex Sans',Helvetica,sans-serif;-webkit-font-smoothing:antialiased;transition:background .3s ease,color .3s ease;}
+  a{color:var(--accent);text-decoration:none;}
+  a:hover{opacity:.72;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+</style>
+<script>
+  (function(){var t;try{t=localStorage.getItem('theme');}catch(e){}document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light');})();
+  document.addEventListener('click',function(e){var b=e.target.closest('[data-theme-toggle]');if(!b)return;var cur=document.documentElement.getAttribute('data-theme');var next=cur==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',next);try{localStorage.setItem('theme',next);}catch(e){}document.querySelectorAll('[data-theme-label]').forEach(function(el){el.textContent=next==='dark'?'Light':'Dark';});});
+</script>
+</helmet>
+<dc-import name="Nav" current="writing" hint-size="100%,72px"></dc-import>
+
+<main style="max-width:1120px;margin:0 auto;padding:0 32px;">
+
+  <section style="padding:80px 0 8px;animation:fadeUp .6s ease both;">
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);">Writing</span>
+    <h1 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(34px,5vw,52px);line-height:1.05;letter-spacing:-0.03em;margin:18px 0 0;max-width:760px;">Notes on architecture, simulation, and research life.</h1>
+    <p style="max-width:600px;margin:22px 0 0;font-size:16.5px;line-height:1.65;color:var(--muted);text-wrap:pretty;">Occasional writing on computer architecture, tooling, and the PhD path. Placeholder posts below &mdash; replace titles, dates, and excerpts with your own.</p>
+  </section>
+
+  <section style="padding:48px 0 0;">
+    <div style="display:flex;flex-direction:column;">
+      <sc-for list="{{ posts }}" as="post" hint-placeholder-count="4">
+        <a href="#" style="display:grid;grid-template-columns:150px 1fr auto;gap:28px;align-items:baseline;padding:28px 0;border-top:1px solid var(--border);color:var(--fg);">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);">{{ post.date }}</span>
+          <div>
+            <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:20px;letter-spacing:-0.02em;margin:0;">{{ post.title }}</h2>
+            <p style="margin:9px 0 0;font-size:14.5px;line-height:1.6;color:var(--muted);text-wrap:pretty;">{{ post.excerpt }}</p>
+          </div>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--muted);white-space:nowrap;">{{ post.read }}</span>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="padding:56px 0 0;">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:34px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--muted);line-height:1.7;">
+      <span style="color:var(--accent);">// note</span><br>
+      This page is scaffolded with placeholder entries. Each post links to <span style="color:var(--fg);">#</span> for now &mdash; point them at full article pages, PDFs, or external posts as you publish.
+    </div>
+  </section>
+
+</main>
+<dc-import name="Footer" hint-size="100%,220px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      posts: [
+        { date: '2026 \u00b7 Draft', title: 'Why pre-RTL modeling changes early architecture decisions', excerpt: 'A short case for spending simulation effort before RTL exists \u2014 and how multi-fidelity models keep exploration honest.', read: '6 min' },
+        { date: '2026 \u00b7 Draft', title: 'Chiplets, interconnects, and the cost of disaggregation', excerpt: 'Notes on the trade-offs that show up once a monolithic SoC is split into chiplets.', read: '8 min' },
+        { date: '2025 \u00b7 Draft', title: 'Estimating PPA when you barely have a design yet', excerpt: 'Practical heuristics and pitfalls for early power, performance, and area estimation.', read: '5 min' },
+        { date: '2025 \u00b7 Draft', title: 'Surviving sponsored research with competing priorities', excerpt: 'How I juggle multiple funded projects without dropping the thread on any of them.', read: '4 min' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

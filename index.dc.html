@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:oklch(0.99 0.003 255);--surface:oklch(0.972 0.004 255);--surface-2:oklch(0.948 0.006 255);
+    --fg:oklch(0.24 0.012 260);--muted:oklch(0.52 0.012 260);--border:oklch(0.9 0.006 260);
+    --accent:oklch(0.56 0.15 255);--accent-soft:oklch(0.56 0.15 255 / 0.12);
+  }
+  [data-theme="dark"]{
+    --bg:oklch(0.17 0.012 260);--surface:oklch(0.205 0.014 260);--surface-2:oklch(0.25 0.016 260);
+    --fg:oklch(0.94 0.006 260);--muted:oklch(0.66 0.012 260);--border:oklch(0.31 0.014 260);
+    --accent:oklch(0.74 0.13 255);--accent-soft:oklch(0.74 0.13 255 / 0.15);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:'IBM Plex Sans',Helvetica,sans-serif;-webkit-font-smoothing:antialiased;transition:background .3s ease,color .3s ease;}
+  a{color:var(--accent);text-decoration:none;}
+  a:hover{opacity:.72;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+</style>
+<script>
+  (function(){var t;try{t=localStorage.getItem('theme');}catch(e){}document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light');})();
+  document.addEventListener('click',function(e){var b=e.target.closest('[data-theme-toggle]');if(!b)return;var cur=document.documentElement.getAttribute('data-theme');var next=cur==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',next);try{localStorage.setItem('theme',next);}catch(e){}document.querySelectorAll('[data-theme-label]').forEach(function(el){el.textContent=next==='dark'?'Light':'Dark';});});
+</script>
+</helmet>
+<dc-import name="Nav" current="home" hint-size="100%,72px"></dc-import>
+
+<main style="max-width:1120px;margin:0 auto;padding:0 32px;">
+
+  <section style="display:grid;grid-template-columns:1.35fr 0.9fr;gap:56px;align-items:center;padding:88px 0 72px;animation:fadeUp .6s ease both;">
+    <div>
+      <div style="display:inline-flex;align-items:center;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;color:var(--muted);border:1px solid var(--border);border-radius:999px;padding:6px 13px;">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--accent);"></span>
+        PhD Candidate · Iowa State University
+      </div>
+      <h1 style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(40px,6vw,66px);line-height:1.02;letter-spacing:-0.03em;margin:26px 0 0;">Architecting the<br>next generation of<br>compute systems.</h1>
+      <p style="max-width:520px;margin:26px 0 0;font-size:17px;line-height:1.65;color:var(--muted);text-wrap:pretty;">Computer engineer with 7+ years in advanced computer architecture — cache memory design, chiplet-based SoC architecture, and multi-fidelity system simulation for early PPA estimation and hardware–software co-design.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:32px;">
+        <a href="Research.dc.html" style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.02em;background:var(--accent);color:var(--bg);padding:12px 20px;border-radius:10px;font-weight:500;">View research →</a>
+        <a href="CV.dc.html" style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.02em;background:var(--surface);color:var(--fg);border:1px solid var(--border);padding:12px 20px;border-radius:10px;">Read CV</a>
+        <a href="mailto:ananda@iastate.edu" style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.02em;color:var(--fg);padding:12px 8px;">Get in touch</a>
+      </div>
+    </div>
+    <div style="position:relative;">
+      <div style="position:absolute;top:-14px;left:-14px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:0.1em;">FIG.01 — HEADSHOT</div>
+      <div style="aspect-ratio:4/5;width:100%;border:1px solid var(--border);border-radius:16px;overflow:hidden;background:var(--surface);">
+        <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="home-headshot" shape="rect" fit="cover" placeholder="Drop your headshot" hint-size="100%,100%">Drop your headshot</x-import>
+      </div>
+    </div>
+  </section>
+
+  <section style="border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:26px 0;display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;">
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);">Research funded &amp; sponsored by</span>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;">
+      <sc-for list="{{ sponsors }}" as="s" hint-placeholder-count="4">
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;color:var(--fg);background:var(--surface);border:1px solid var(--border);padding:8px 15px;border-radius:8px;">{{ s }}</span>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="padding:80px 0 8px;">
+    <div style="display:flex;align-items:baseline;gap:16px;margin-bottom:36px;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--accent);">01</span>
+      <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:26px;letter-spacing:-0.02em;margin:0;">Focus areas</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:14px;overflow:hidden;">
+      <sc-for list="{{ focus }}" as="f" hint-placeholder-count="4">
+        <div style="background:var(--bg);padding:28px 24px;min-height:180px;display:flex;flex-direction:column;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);">{{ f.num }}</span>
+          <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:18px;margin:16px 0 0;letter-spacing:-0.01em;">{{ f.title }}</h3>
+          <p style="margin:10px 0 0;font-size:13.5px;line-height:1.6;color:var(--muted);text-wrap:pretty;">{{ f.desc }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="padding:72px 0 0;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:14px;overflow:hidden;">
+      <sc-for list="{{ stats }}" as="st" hint-placeholder-count="4">
+        <div style="background:var(--surface);padding:26px 22px;">
+          <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:34px;letter-spacing:-0.02em;color:var(--fg);">{{ st.value }}</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.04em;color:var(--muted);margin-top:6px;">{{ st.label }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="padding:80px 0 0;">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:44px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;">
+      <div>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);">Selected work</span>
+        <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:28px;letter-spacing:-0.02em;margin:12px 0 0;">Pre-RTL evaluation &amp; architecture exploration</h2>
+        <p style="max-width:560px;margin:14px 0 0;font-size:15px;line-height:1.65;color:var(--muted);text-wrap:pretty;">System modeling and simulation for early estimation of power, performance, and area — spanning chiplet SoC design, distributed AI, and embedded cybersecurity for Boeing, Collins Aerospace, DARPA, and NSF.</p>
+      </div>
+      <a href="Research.dc.html" style="font-family:'IBM Plex Mono',monospace;font-size:13px;white-space:nowrap;background:var(--accent);color:var(--bg);padding:13px 22px;border-radius:10px;font-weight:500;">See projects →</a>
+    </div>
+  </section>
+
+</main>
+<dc-import name="Footer" hint-size="100%,220px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      sponsors: ['Boeing', 'Collins Aerospace', 'DARPA', 'NSF'],
+      focus: [
+        { num: '/ 01', title: 'Cache & memory design', desc: 'Microarchitecture of cache hierarchies and memory systems for high-performance, energy-efficient compute.' },
+        { num: '/ 02', title: 'Chiplet-based SoC', desc: 'Disaggregated, chiplet-based system-on-chip architecture and interconnect exploration.' },
+        { num: '/ 03', title: 'Multi-fidelity simulation', desc: 'Pre-RTL system modeling for early PPA estimation across abstraction levels.' },
+        { num: '/ 04', title: 'HW/SW co-design', desc: 'Joint hardware\u2013software architecture exploration for emerging AI and secure-embedded workloads.' }
+      ],
+      stats: [
+        { value: '9+', label: 'YEARS EXPERIENCE' },
+        { value: '4', label: 'SPONSORED PROGRAMS' },
+        { value: 'PhD', label: 'IN PROGRESS \u00b7 ISU' },
+        { value: 'PPA', label: 'EARLY-STAGE MODELING' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
