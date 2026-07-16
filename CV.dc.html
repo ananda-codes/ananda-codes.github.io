@@ -60,52 +60,10 @@
     <a href="#" style="font-family:'IBM Plex Mono',monospace;font-size:13px;background:var(--accent);color:var(--bg);padding:13px 22px;border-radius:10px;font-weight:500;">Download PDF &#8595;</a>
   </section>
 
-  <section style="padding:16px 0 0;">
-    <div style="display:flex;align-items:baseline;gap:16px;margin-bottom:24px;">
-      <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--accent);">01</span>
-      <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:24px;letter-spacing:-0.02em;margin:0;">Experience</h2>
-    </div>
-    <div style="display:flex;flex-direction:column;">
-      <sc-for list="{{ experience }}" as="job" hint-placeholder-count="4">
-        <div style="display:grid;grid-template-columns:170px 1fr;gap:32px;padding:26px 0;border-top:1px solid var(--border);">
-          <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--muted);">{{ job.years }}</span>
-          <div>
-            <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:18px;margin:0;letter-spacing:-0.01em;">{{ job.role }}</h3>
-            <div style="font-size:14px;color:var(--accent);margin-top:5px;font-family:'IBM Plex Mono',monospace;">{{ job.org }}</div>
-            <p style="margin:12px 0 0;font-size:14.5px;line-height:1.65;color:var(--muted);text-wrap:pretty;">{{ job.desc }}</p>
-          </div>
-        </div>
-      </sc-for>
-    </div>
-  </section>
-
-  <section style="padding:56px 0 0;">
-    <div style="display:flex;align-items:baseline;gap:16px;margin-bottom:24px;">
-      <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--accent);">02</span>
-      <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:24px;letter-spacing:-0.02em;margin:0;">Education</h2>
-    </div>
-    <div style="display:flex;flex-direction:column;">
-      <sc-for list="{{ education }}" as="ed" hint-placeholder-count="3">
-        <div style="display:grid;grid-template-columns:170px 1fr;gap:32px;padding:22px 0;border-top:1px solid var(--border);">
-          <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--muted);">{{ ed.years }}</span>
-          <div>
-            <h3 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:18px;margin:0;letter-spacing:-0.01em;">{{ ed.degree }}</h3>
-            <div style="font-size:14px;color:var(--muted);margin-top:5px;">{{ ed.school }}</div>
-          </div>
-        </div>
-      </sc-for>
-    </div>
-  </section>
-
-  <section style="padding:56px 0 0;">
-    <div style="display:flex;align-items:baseline;gap:16px;margin-bottom:24px;">
-      <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--accent);">03</span>
-      <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:24px;letter-spacing:-0.02em;margin:0;">Sponsors &amp; collaborations</h2>
-    </div>
-    <div style="display:flex;flex-wrap:wrap;gap:10px;">
-      <sc-for list="{{ sponsors }}" as="s" hint-placeholder-count="4">
-        <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;color:var(--fg);background:var(--surface);border:1px solid var(--border);padding:9px 16px;border-radius:8px;">{{ s }}</span>
-      </sc-for>
+  <section style="padding:24px 0 120px;">
+    <div style="border:1px solid var(--border);border-radius:16px;padding:64px 40px;text-align:center;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);">Coming soon</span>
+      <p style="margin:14px auto 0;max-width:420px;font-size:15px;line-height:1.65;color:var(--muted);">CV content is being prepared and will be added here shortly.</p>
     </div>
   </section>
 
